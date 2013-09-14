@@ -4,7 +4,7 @@ if(!class_exists('Strainer')):
 abstract class Strainer{
 	function __construct(){
 	}
-	abstract public function process($im);
+	abstract public function process(Imagick $im);
 };
 
 endif;

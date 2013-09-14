@@ -1,22 +1,24 @@
 <?php
 include('Strainer.class.php');
-include('Overlay.class.php');
+include('Lomo.class.php');
 include('Pipeline.class.php');
 
-$im = imagecreatefromjpeg('images/1.jpg');
+$im = new Imagick('images/1.jpg');
 
-/*
-imagefilter( $im , IMG_FILTER_PIXELATE, 100, 1);
- */
+//imagefilter( $im , IMG_FILTER_CONTRAST, -10 );
 
 $pipeline = new Pipeline();
 
-$overlay = new Overlay();
+$lomo = new Lomo(2.5);
 
-$pipeline->addStrainer($overlay);
+$pipeline->addStrainer($lomo);
 
 $pipeline->process($im);
 
-imagejpeg($im, 'output.jpg');
+$im->setImageFormat('jpeg');
+
+header('Content-Type: image/jpeg');
+
+echo $im;
 
 ?>
